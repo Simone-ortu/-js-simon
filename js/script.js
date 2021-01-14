@@ -4,34 +4,63 @@
 
 
 // Creo array per i numeri
-var num = []
+var num = [];
 
+var secondi = 30;
 
+var numUtente = [];
 
-
-
+var tempo = setInterval(myTimer, 30000);
 
 // Creo il ciclo per i numeri casuali
 
-for (let i = 1; i < 6; i++) {
-    var randomNum = Math.floor((Math.random() * 50) + 1)
+while (num.length < 5) {
+    var randomNum = generaRandom(1, 50)
     num.push(randomNum)
-    console.log(num)
 }
+console.log(num)
 
 alert(num);
 
-// imposto il timer per l'alert
-
-// var clock = setInterval(myFunction, 3000);
-
-// function myFunction() {
-// alert('Hello');
-// }
-    // setTimeout(myTimeout1, 30000)
 
 
+var j = 0;
+function myTimer () {
+    
+    while (j <= 4) {
+        var guessed = parseInt(prompt('Inserisci i numeri precedentemente visti'));
+        var goodGuess = verify(guessed, numUtente);
+        if (num.includes(guessed)) {
+            console.log('Hai indovinato il numero ', guessed );
+            j++;
+        } 
+        else {
+            j++;
+            
+        };
+        
+    };
+};
+console.log("Guessed numbers: ", numUtente);
 
-    // function myTimeout1() {
-    //     alert(num);
-    //   };
+
+function verify(inpt, arr) {
+    if (isNaN(inpt)) {
+        var not = alert("Devi inserire un numero da 1 a 50");
+    }
+    else if (arr.includes(inpt)) {
+        not = alert("Il numero non può essere scritto più di una volta");
+    }
+    else if (inpt <= 0 || inpt > 50) {
+        not = alert("Devi inserire un numero da 1 a 50");
+    }
+    else {
+        arr.push(inpt);
+    }
+};
+
+
+    function generaRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
